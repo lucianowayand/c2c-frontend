@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
-import { decrypt, encrypt } from "../services/crypto";
 
 interface User {
     id: number;
@@ -28,7 +27,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const cookie = localStorage.getItem('session')
         if (cookie) {
-            const jwt = JSON.parse(decrypt(cookie)).input
+            const jwt = JSON.parse(cookie).input
             const payload = jwt.split(".")[1];
             const decryptedUser = JSON.parse(atob(payload));
             if (decryptedUser) {
@@ -55,8 +54,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     async function logIn(email: string, password: string) {
         try {
             const res = await api.post('/users/login', { email, password })
-            const encryptedSession = encrypt(res.data)
-            localStorage.setItem('session', encryptedSession)
+            localStorage.setItem('session', res.data)
             const payload = res.data.split(".")[1];
             const decryptedUser = JSON.parse(atob(payload));
             if (decryptedUser) {

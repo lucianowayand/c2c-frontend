@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { decrypt } from './crypto';
 
-const token = JSON.parse(decrypt(localStorage.getItem('session')) || '{}').input || '';
+const token = JSON.parse(localStorage.getItem('session') || '{}').input || '';
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
