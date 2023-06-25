@@ -4,7 +4,6 @@ import { EmptyQuery } from "../../components/empty-query";
 import { useAuth } from "../../context/AuthContext";
 import { Movie } from "../../utils/types";
 import { api } from "../../services/api";
-import { Box, CircularProgress, Grid } from "@mui/material";
 import MovieCard from "../../components/movie-card";
 
 
@@ -43,20 +42,20 @@ export default function MyLibrary() {
         setLoading(false);
     }
 
-    return <DashboardLayout>
-        {!loading ? <Box mt={3}>
-            {movies.length > 0 ? <Grid container>
-                {movies.map((movie, index) => {
-                    return <Grid key={movie.imdbID} item xs={4}>
-                        <MovieCard movie={movie} moviesArray={movies} index={index} setterFunction={setMovies} />
-                    </Grid>
-                })}
-            </Grid> : <Box mt={15}>
-                <EmptyQuery text="It looks like there are no movies in your library!
-            Search for a movie you have watched and add it here! " />
-            </Box>}
-        </Box> : <Box mt={15} width="100%" display="flex" justifyContent="center">
-            <CircularProgress sx={{ color: "black" }} size="50px" />
-        </Box>}
-    </DashboardLayout>
+    // return <DashboardLayout>
+    //     {!loading ? <Box mt={3}>
+    //         {movies.length > 0 ? <Grid container>
+    //             {movies.map((movie, index) => {
+    //                 return <Grid key={movie.imdbID} item xs={4}>
+    //                     <MovieCard movie={movie} moviesArray={movies} index={index} setterFunction={setMovies} />
+    //                 </Grid>
+    //             })}
+    //         </Grid> : <Box mt={15}>
+    //             <EmptyQuery text="It looks like there are no movies in your library!
+    //         Search for a movie you have watched and add it here! " />
+    //         </Box>}
+    //     </Box> : <Box mt={15} width="100%" display="flex" justifyContent="center">
+    //         <CircularProgress sx={{ color: "black" }} size="50px" />
+    //     </Box>}
+    // </DashboardLayout>
 }

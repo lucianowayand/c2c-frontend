@@ -1,4 +1,3 @@
-import { Box, CircularProgress, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { EmptyQuery } from "../../components/empty-query";
 import { Movie } from "../../utils/types";
@@ -6,7 +5,6 @@ import { api } from "../../services/api";
 
 import DashboardLayout from "../../components/dashboard-layout";
 import MovieCard from "../../components/movie-card";
-import SearchIcon from '@mui/icons-material/Search';
 import './style.css';
 import { useAuth } from "../../context/AuthContext";
 
@@ -50,24 +48,24 @@ export default function Search() {
 
     
 
-    return <DashboardLayout>
-        <Box display="flex" alignItems="center">
-            <input value={query} onChange={(event) => setQuery(event.target.value)} style={{ paddingLeft: "1em" }} />
-            <SearchIcon sx={{ marginLeft: "-1.5em" }} />
-        </Box>
-        {!loading ? <Box mt={3}>
-            {movies.length > 0 ? <Grid container>
-                {movies.map((movie, index) => {
-                    return <Grid item xs={4}>
-                        <MovieCard movie={movie} moviesArray={movies} index={index} setterFunction={setMovies} />
-                    </Grid>
-                })}
-            </Grid> : <Box mt={15}>
-                <EmptyQuery text="We couldn't find the movies you were looking for :( " />
-            </Box>}
-        </Box> : <Box mt={15} width="100%" display="flex" justifyContent="center">
-            <CircularProgress sx={{ color: "black" }} size="50px" />
-        </Box>}
-    </DashboardLayout>
+    // return <DashboardLayout>
+    //     <Box display="flex" alignItems="center">
+    //         <input value={query} onChange={(event) => setQuery(event.target.value)} style={{ paddingLeft: "1em" }} />
+    //         <SearchIcon sx={{ marginLeft: "-1.5em" }} />
+    //     </Box>
+    //     {!loading ? <Box mt={3}>
+    //         {movies.length > 0 ? <Grid container>
+    //             {movies.map((movie, index) => {
+    //                 return <Grid item xs={4}>
+    //                     <MovieCard movie={movie} moviesArray={movies} index={index} setterFunction={setMovies} />
+    //                 </Grid>
+    //             })}
+    //         </Grid> : <Box mt={15}>
+    //             <EmptyQuery text="We couldn't find the movies you were looking for :( " />
+    //         </Box>}
+    //     </Box> : <Box mt={15} width="100%" display="flex" justifyContent="center">
+    //         <CircularProgress sx={{ color: "black" }} size="50px" />
+    //     </Box>}
+    // </DashboardLayout>
 }
 
