@@ -17,4 +17,4 @@ To run this service, you need to have the following installed on your system:
 * Clone the repository: `git clone <repository_url>`
 * Install the dependencies: `npm install`
 * Create the Environment Variable File and add the API endpoint
-* Start the application: `npm start`
+* Start the application: `npm run dev`
