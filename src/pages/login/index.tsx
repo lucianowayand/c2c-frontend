@@ -1,7 +1,7 @@
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 import { useEffect, useState } from "react"
 import { useAuth } from "../../context/AuthContext"
-import './style.css'
+import {Form} from '../ ../components/Form'
 
 export default function Login() {
     const { logIn, user } = useAuth()
@@ -19,7 +19,13 @@ export default function Login() {
         logIn(email, password)
     }
 
-    return <div className="bg-blue-400">
-        <h1>Teste</h1>
+    return (
+        <div className="h-screen flex">
+            <div className="w-1/3 flex flex-col justify-center items-center overflow-hidden">
+                <Form />
+                <div id='bolinhas' className=' absolute bg-orange-700 h-32 w-1/3 bottom-0'></div>
+            </div>
+            <div className="bg-zinc-200 flex-1"></div>
         </div>
+    )
 }
