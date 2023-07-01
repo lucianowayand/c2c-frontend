@@ -25,19 +25,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>();
 
     useEffect(() => {
-        const cookie = localStorage.getItem('session')
-        if (cookie) {
-            const jwt = JSON.parse(cookie).input
-            const payload = jwt.split(".")[1];
-            const decryptedUser = JSON.parse(atob(payload));
-            if (decryptedUser) {
-                setUser({
-                    id: decryptedUser.sub,
-                    full_name: decryptedUser.full_name,
-                    email: decryptedUser.email
-                })
-            }
-        }
+        refreshSession()
     }, [])
 
     // Printing user for debugging purposes
@@ -45,29 +33,42 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
         console.log(user)
     }, [user])
 
-    function logOut() {
-        setUser(null);
-        localStorage.removeItem('session')
-        window.location.href = '/'
+    function refreshSession(jwt?: string) {
+        let token = "" 
+        if(!jwt) {
+            token = localStorage.getItem('session') || ""
+        }
+        if (jwt) {
+            token = jwt
+        }
+        if(token && token !== ""){
+            const payload = token.split(".")[1];
+            const user = JSON.parse(atob(payload))
+            setUser({
+                id: user.sub,
+                full_name: user.full_name,
+                email: user.email
+            })
+        }
     }
 
     async function logIn(email: string, password: string) {
         try {
-            const res = await api.post('/users/login', { email, password })
-            localStorage.setItem('session', res.data)
-            const payload = res.data.split(".")[1];
-            const decryptedUser = JSON.parse(atob(payload));
-            if (decryptedUser) {
-                setUser({
-                    id: decryptedUser.sub,
-                    full_name: decryptedUser.full_name,
-                    email: decryptedUser.email
-                })
+            const res = await api.post('api/v1/users/login', { email, password })
+            if (res.data) {
+                localStorage.setItem('session', res.data)
+                refreshSession(res.data)
             }
 
         } catch (error) {
             alert(error)
         }
+    }
+    
+    function logOut() {
+        setUser(null);
+        localStorage.removeItem('session')
+        window.location.href = '/'
     }
 
     return (

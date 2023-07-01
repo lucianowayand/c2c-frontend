@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const token = JSON.parse(localStorage.getItem('session') || '{}').input || '';
+const token = localStorage.getItem('session');
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -14,7 +14,7 @@ export const api = axios.create({
 api.interceptors.response.use(
   response => response,
   error => {
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       localStorage.removeItem('session');
       window.location.href = '/';
     }

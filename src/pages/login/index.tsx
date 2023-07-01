@@ -1,18 +1,14 @@
 import useWindowDimensions from "../../hooks/useWindowDimensions"
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import { useAuth } from "../../context/AuthContext"
 import myImage from './assets/shopping-bags.svg'
 
 export default function Login() {
-    const { logIn, user } = useAuth()
+    const { logIn } = useAuth()
     const { width } = useWindowDimensions()
 
     const [password, setPassword] = useState<string>("")
     const [email, setEmail] = useState<string>("")
-
-    useEffect(() => {
-        if (user) window.location.href = '/dashboard'
-    }, [user])
 
     const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -22,14 +18,28 @@ export default function Login() {
     return (
         <div className="h-screen flex">
             <div className="w-1/3 flex flex-col justify-center items-center overflow-hidden">
-            <form className="flex flex-col gap-5 w-96 mb-44">
+            <form className="flex flex-col gap-5 w-96 mb-44" onSubmit={submitForm}>
                 <label>
                     <div className="text-orange-600 font-bold text-2xl">EMAIL</div>
-                    <input className="border-2 border-orange-600 h-12 w-full p-1" type="text" name="name" />
+                    <input 
+                        required 
+                        className="border-2 border-orange-600 h-12 w-full p-1" 
+                        type="text" 
+                        name="name" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                    />
                 </label>
                 <label>
                     <div className="text-orange-600 font-bold text-2xl">SENHA</div>
-                    <input className="border-2 border-orange-600 h-12 w-full p-1" type="password" name="password" />
+                    <input 
+                        required 
+                        className="border-2 border-orange-600 h-12 w-full p-1" 
+                        type="password" 
+                        name="password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                    />
                 </label>
                 <input className="bg-orange-600 text-white rounded-xl w-72 h-10 self-center mt-16 text-xl hover:bg-orange-500" type="submit" value="Entrar" />
                 <a className='self-center text-orange-600 font-bold' href="">Esqueci minha senha</a>

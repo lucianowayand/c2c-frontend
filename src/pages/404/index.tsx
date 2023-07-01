@@ -1,8 +1,6 @@
-
 export default function NotFound() {
-    return <Box width="100vw" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-        <Typography fontSize={24} fontWeight={700} fontFamily="Inter">Page not found</Typography>
-        <WarningAmberIcon sx={{ fontSize: "5em", padding: "0.5em" }} />
-        <Typography fontSize={20} fontWeight={700} fontFamily="Inter">ERROR 404</Typography>
-    </Box>
+    return <div style={{display:"flex", height:"100vh", width:"100vw", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+        <h1>Erro 404</h1>
+        <h2>Página não encontrada</h2>
+    </div>
 }
