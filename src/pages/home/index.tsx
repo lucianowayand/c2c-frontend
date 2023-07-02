@@ -1,10 +1,12 @@
 import { useEffect } from "react"
 import { useAuth } from "../../context/AuthContext"
 import LocalIcon from './assets/local.svg'
+import { useNavigate } from "react-router-dom"
 
 export default function Home() {
     const { user, isLoading } = useAuth()
-
+    const navigate = useNavigate()
+    
     useEffect(() => {
         if(isLoading) return
         if(!user) {
@@ -387,7 +389,7 @@ export default function Home() {
                       <div className="text-2xl">X anúncios encontrados</div>
                       <div className="grid grid-cols-3 gap-8">
                         {mockProducts?.map((product) => (
-                            <a href="" className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
+                            <a href={`/product/${product.id}`} className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
                                 <img src={product.photos[0].photo_url} width={200} height={150} alt="" />
                                 <div className="flex flex-col p-2">
                                   <p className="text-xl">{product.name}</p>
