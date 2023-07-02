@@ -1,11 +1,19 @@
 import useWindowDimensions from "../../hooks/useWindowDimensions"
-import {  useState } from "react"
+import {  useEffect, useState } from "react"
 import { useAuth } from "../../context/AuthContext"
 import myImage from './assets/shopping-bags.svg'
 
 export default function Login() {
     const { logIn } = useAuth()
     const { width } = useWindowDimensions()
+    const { user, isLoading } = useAuth()
+    
+    useEffect(() => {
+        if(isLoading) return
+        if(user) {
+            window.location.href = '/home'
+        }
+    }, [user, isLoading])
 
     const [password, setPassword] = useState<string>("")
     const [email, setEmail] = useState<string>("")
@@ -16,14 +24,16 @@ export default function Login() {
     }
 
     return (
-        <div className="h-screen flex">
+        <>
+        {!isLoading && !user && (
+            <div className="h-screen flex">
             <div className="w-1/3 flex flex-col justify-center items-center overflow-hidden">
             <form className="flex flex-col gap-5 w-96 mb-44" onSubmit={submitForm}>
                 <label>
                     <div className="text-orange-600 font-bold text-2xl">EMAIL</div>
                     <input 
                         required 
-                        className="border-2 border-orange-600 h-12 w-full p-1" 
+                        className="border-2 rounded border-orange-600 h-12 w-full p-1" 
                         type="text" 
                         name="name" 
                         value={email} 
@@ -34,7 +44,7 @@ export default function Login() {
                     <div className="text-orange-600 font-bold text-2xl">SENHA</div>
                     <input 
                         required 
-                        className="border-2 border-orange-600 h-12 w-full p-1" 
+                        className="border-2 rounded border-orange-600 h-12 w-full p-1" 
                         type="password" 
                         name="password" 
                         value={password} 
@@ -42,7 +52,6 @@ export default function Login() {
                     />
                 </label>
                 <input className="bg-orange-600 text-white rounded-xl w-72 h-10 self-center mt-16 text-xl hover:bg-orange-500" type="submit" value="Entrar" />
-                <a className='self-center text-orange-600 font-bold' href="">Esqueci minha senha</a>
             </form>
             <div id='bolinhas' className=' absolute bg-orange-600 h-32 w-1/3 bottom-0'></div>
 
@@ -58,5 +67,7 @@ export default function Login() {
                 </div>
             </div>
         </div>
+        )}
+        </>
       )
 }

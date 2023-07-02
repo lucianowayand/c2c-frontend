@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 
-interface User {
+export interface User {
     id: number;
     full_name: string;
     email: string;
@@ -12,28 +12,29 @@ interface AuthContextValues {
     setUser: (user: User | null) => void;
     logOut: () => void;
     logIn: (email: string, password: string) => void;
+    isLoading: boolean;
+    setIsLoading: (isLoading: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextValues>({
     user: undefined,
     setUser: () => { },
     logOut: () => { },
-    logIn: () => { }
+    logIn: () => { },
+    isLoading: true,
+    setIsLoading: () => { }
 })
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         refreshSession()
     }, [])
 
-    // Printing user for debugging purposes
-    useEffect(() => {
-        console.log(user)
-    }, [user])
-
     function refreshSession(jwt?: string) {
+        setIsLoading(true)
         let token = "" 
         if(!jwt) {
             token = localStorage.getItem('session') || ""
@@ -50,15 +51,18 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
                 email: user.email
             })
         }
+        setIsLoading(false)
     }
 
     async function logIn(email: string, password: string) {
         try {
+            setIsLoading(true)
             const res = await api.post('api/v1/users/login', { email, password })
             if (res.data) {
                 localStorage.setItem('session', res.data)
                 refreshSession(res.data)
             }
+            setIsLoading(false)
 
         } catch (error) {
             alert(error)
@@ -66,13 +70,15 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     
     function logOut() {
+        setIsLoading(true)
         setUser(null);
         localStorage.removeItem('session')
         window.location.href = '/'
+        setIsLoading(false)
     }
 
     return (
-        <AuthContext.Provider value={{ user, setUser, logOut, logIn }}>
+        <AuthContext.Provider value={{ user, setUser, logOut, logIn, isLoading, setIsLoading }}>
             {children}
         </AuthContext.Provider>
     )
