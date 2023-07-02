@@ -1,20 +1,7 @@
-import { useEffect } from "react"
-import { useAuth } from "../../context/AuthContext"
 import LocalIcon from './assets/local.svg'
-import { useNavigate } from "react-router-dom"
+import DashboardLayout from "../../components/dashboard-layout"
 
 export default function Home() {
-    const { user, isLoading } = useAuth()
-    const navigate = useNavigate()
-    
-    useEffect(() => {
-        if(isLoading) return
-        if(!user) {
-            window.location.href = '/'
-        }
-        console.log(user)
-    }, [user, isLoading])
-
     const mockProducts = [
       {
         id: "7d30bd81-a84a-4348-982c-5cda7e4eb48e",
@@ -360,52 +347,36 @@ export default function Home() {
       }
     ]
 
-    return (
-        <> 
-            {!isLoading && user && (
-            <div className="flex flex-col items-center bg-zinc-200">
-                  <div className="bg-orange-600 h-24 w-screen flex flex-col items-center">
-                      <a href="" className=' absolute left-6 mt-6 flex flex-col gap-2 w-12 h-12'>
-                        <div className='w-full h-2 bg-white'></div>
-                        <div className='w-full h-2 bg-white'></div>
-                        <div className='w-full h-2 bg-white'></div>
-                      </a>
-                      <div className="w-1/3 flex justify-center">
-                          <input className="w-96 h-12 mt-6 flex-none" type="text" />
-                          <a className="h-12 w-12 bg-white mt-6 ml-2 flex-none" href=""></a>
+    return ( 
+      <DashboardLayout>
+        <div className="bg-white p-8 flex flex-col space-y-8">
+          <div className='flex flex-row w-full'>
+            <div className="text-4xl font-bold">Anúncios</div>
+            <div className='absolute right-72 flex gap-4 items-center'>
+              <p>2 filtros aplicados</p>
+              <a href="" className=' p-1 text-orange-600 text-xl border-2 border-orange-600 rounded-md w-72 flex justify-center place-self-center'>
+                <p className='self-center'>Filtros</p>
+              </a>
+            </div>
+          </div>
+          <div className="text-2xl">X anúncios encontrados</div>
+          <div className="grid grid-cols-3 gap-8">
+            {mockProducts?.map((product) => (
+                <a href={`/product/${product.id}`} className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
+                    <img src={product.photos[0].photo_url} width={200} height={150} alt="" />
+                    <div className="flex flex-col p-2">
+                      <p className="text-xl">{product.name}</p>
+                      <p className="text-xl font-bold">R$ {product.value}</p>
+                      <div className='flex mt-8 gap-2'>
+                        <img className='' src={LocalIcon} alt="icon" width={24} height={24}/>
+                        <p>{product.owner.city},</p>
+                        <p>{product.owner.state}</p>
                       </div>
-                      <div className="absolute text-white font-black text-5xl right-0 mr-12 mt-5">C2C.</div>
-                  </div>
-                  <div className="bg-white h-screen w-3/4 p-8 flex flex-col space-y-8">
-                      <div className='flex flex-row w-full'>
-                        <div className="text-4xl font-bold">Anúncios</div>
-                        <div className='absolute right-72 flex gap-4 items-center'>
-                          <p>2 filtros aplicados</p>
-                          <a href="" className=' p-1 text-orange-600 text-xl border-2 border-orange-600 rounded-md w-72 flex justify-center place-self-center'>
-                            <p className='self-center'>Filtros</p>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="text-2xl">X anúncios encontrados</div>
-                      <div className="grid grid-cols-3 gap-8">
-                        {mockProducts?.map((product) => (
-                            <a href={`/product/${product.id}`} className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
-                                <img src={product.photos[0].photo_url} width={200} height={150} alt="" />
-                                <div className="flex flex-col p-2">
-                                  <p className="text-xl">{product.name}</p>
-                                  <p className="text-xl font-bold">R$ {product.value}</p>
-                                  <div className='flex mt-8 gap-2'>
-                                    <img className='' src={LocalIcon} alt="icon" width={24} height={24}/>
-                                    <p>{product.owner.city},</p>
-                                    <p>{product.owner.state}</p>
-                                  </div>
-                                </div>
-                            </a>
-                        ))}
-                      </div>
-                  </div>
-              </div>
-            )}
-        </>
+                    </div>
+                </a>
+            ))}
+          </div>
+        </div>
+      </DashboardLayout>
     )
 }
