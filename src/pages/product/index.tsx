@@ -62,7 +62,7 @@ export default function ProductPage() {
                         }
                       }}
                       >
-                        <ArrowLeft size={40} color="currentColor" />
+                        <ArrowLeft size={40} color={photoIndex !== undefined && photoIndex > 0 ? "currentColor" : "grey"} />
                       </div>
                     </div>
                     <img src={mockProduct.photos[photoIndex].photo_url} width={500} height={400} alt="" />
@@ -73,7 +73,7 @@ export default function ProductPage() {
                         }
                       }}
                       >
-                        <ArrowRight size={40} color="currentColor" />
+                        <ArrowRight size={40} color={photoIndex !== undefined && photoIndex < mockProduct.photos.length - 1 ? "currentColor" : "grey"} />
                       </div>
                     </div>
                 </div>
