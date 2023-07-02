@@ -3,6 +3,8 @@ import arrowLeft from './assets/arrow-left.svg'
 import arrowRight from './assets/arrow-right.svg'
 import { useState } from 'react'
 import DashboardLayout from '../../components/dashboard-layout'
+import ArrowLeft from '../../components/icons/ArrowLeft'
+import ArrowRight from '../../components/icons/ArrowRight'
 
 export default function ProductPage() {
     const mockProduct = {
@@ -54,20 +56,25 @@ export default function ProductPage() {
                 <div className="text-zinc-500">Publicado em: {mockProduct.createdAt}</div>
                 <div className="flex justify-center bg-zinc-300">
                     <div className='px-2 flex items-center'>
-                      <img className='' width={40} src={arrowLeft} alt="" onClick={() => {
+                      <div onClick={() => {
                         if (photoIndex !== undefined && photoIndex > 0) {
                             setPhotoIndex(photoIndex - 1)
                         }
-                      }}/>
+                      }}
+                      >
+                        <ArrowLeft size={40} color="currentColor" />
+                      </div>
                     </div>
                     <img src={mockProduct.photos[photoIndex].photo_url} width={500} height={400} alt="" />
                     <div className='px-2 flex items-center'>
-                      <img width={40} src={arrowRight} alt="" onClick={() => {
+                      <div onClick={() => {
                         if (photoIndex !== undefined && photoIndex < mockProduct.photos.length - 1) {
                             setPhotoIndex(photoIndex + 1)
                         }
                       }}
-                      />
+                      >
+                        <ArrowRight size={40} color="currentColor" />
+                      </div>
                     </div>
                 </div>
                 <div className="text-3xl">R$ {mockProduct.value}</div>
