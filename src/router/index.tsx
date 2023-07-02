@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/login";
 import NotFound from "../pages/404";
 import Home from "../pages/home";
-import ProductPage from "../pages/product-page";
+import ProductPage from "../pages/product";
 import PublishProductPage from '../pages/publish-product'
 
 export default function Router() {

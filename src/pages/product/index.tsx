@@ -1,10 +1,9 @@
 import chatIcon from './assets/chatIcon.svg'
-import arrowLeft from './assets/arrow-left.svg'
-import arrowRight from './assets/arrow-right.svg'
 import { useState } from 'react'
 import DashboardLayout from '../../components/dashboard-layout'
 import ArrowLeft from '../../components/icons/ArrowLeft'
 import ArrowRight from '../../components/icons/ArrowRight'
+import moment from 'moment'
 
 export default function ProductPage() {
     const mockProduct = {
@@ -47,13 +46,14 @@ export default function ProductPage() {
       }
       
     const [photoIndex, setPhotoIndex] = useState(0) 
-
+    const productDate = moment(mockProduct.owner.createdAt).format("DD/MM/YYYY");
+    const publishedAt = moment(mockProduct.createdAt).format("DD/MM/YYYY") + " às " + moment(mockProduct.createdAt).format("HH:mm");
     return (
         <DashboardLayout>
           <div className="flex w-full justify-center p-8 space-x-24 mt-12">
               <div className="flex flex-col gap-6">
                 <div className="text-4xl font-semibold">{mockProduct.name}</div>
-                <div className="text-zinc-500">Publicado em: {mockProduct.createdAt}</div>
+                <div className="text-zinc-500">Publicado em: {publishedAt}</div>
                 <div className="flex justify-center bg-zinc-300">
                     <div className='px-2 flex items-center'>
                       <div onClick={() => {
@@ -85,7 +85,7 @@ export default function ProductPage() {
                     <div className="text-3xl self-center">{mockProduct.owner.full_name}</div>
                     <div className="bg-zinc-500 w-full h-px mt-16"></div>
                 </div>
-                <div className="self-center font-semibold">Membro desde: {mockProduct.owner.createdAt}</div>
+                <div className="self-center font-semibold">Membro desde: {productDate}</div>
                 <div className="self-center w-1/2 h-12 bg-orange-600 rounded-full flex items-center justify-center gap-3 mt-8">
                     <img className='' src={chatIcon} alt="" />
                     <div className="text-white text-xl">Chat</div>
