@@ -112,6 +112,17 @@ export default function PublishProductPage() {
                         onChange={(e) => setDescription(e.target.value)} 
                     />
                 </label>
+                <label>
+                    <div className="text-orange-600 font-bold text-2xl mb-2">Categoria</div>
+                    <select name="cars" className="border-2 rounded border-orange-600 h-12 w-full p-1" onChange={(e) => setCategory(e.target.value)} >
+                        <option value="category">Livros</option>
+                        <option value="cars">Carros</option>
+                        <option value="toys">Brinquedos</option>
+                        <option value="tools">Ferramentas</option>
+                        <option value="kitchen">Cozinha</option>
+                        <option value="forniture">Móveis</option>
+                    </select> 
+                </label>
                 <div className="text-orange-600 font-bold text-2xl">Imagens</div>
                 <div className="flex flex-row gap-2 align-middle justify-center">
                     <ImageSelector index={0}/>
