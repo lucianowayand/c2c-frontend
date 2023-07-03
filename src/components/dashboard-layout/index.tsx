@@ -15,7 +15,7 @@ export default function DashboardLayout({ children }: any) {
     return (
         <>
         {!isLoading && user && (
-            <div className="flex flex-col h-screen bg-gray-300">
+            <div className=" flex flex-col h-screen bg-gray-300">
                 <div className="bg-orange-600 h-24 w-screen flex flex-col items-center">
                     <a href="" className=' absolute left-6 mt-6 flex flex-col gap-2 w-12 h-12'>
                         <div className='w-full h-2 bg-white'></div>
