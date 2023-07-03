@@ -15,7 +15,7 @@ export default function DashboardLayout({ children }: any) {
     return (
         <>
         {!isLoading && user && (
-            <div className=" flex flex-col h-full bg-gray-300">
+            <div className=" flex flex-col h-screen bg-gray-300">
                 <div className="bg-orange-600 h-24 w-screen flex flex-col items-center">
                     <a href="" className=' absolute left-6 mt-6 flex flex-col gap-2 w-12 h-12'>
                         <div className='w-full h-2 bg-white'></div>
@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }: any) {
                     </div>
                     <a href="/home" className="absolute text-white font-black text-5xl right-0 mr-12 mt-5">C2C.</a>
                 </div>
-                <div className='w-screen flex justify-center h-full'>
+                <div className='w-screen flex flex-1 justify-center'>
                     <div className="bg-white w-3/4 p-8 flex justify-center">
                         {children}
                     </div>

@@ -7,6 +7,7 @@ import ProductPage from "../pages/product";
 import PublishProductPage from '../pages/publish-product'
 import MyProducts from '../pages/my-products'
 import MyChats from '../pages/my-chats'
+import Chat from '../pages/chat'
 
 export default function Router() {
     return <BrowserRouter>
@@ -17,6 +18,7 @@ export default function Router() {
             <Route path="/publish-product" element={<PublishProductPage />} />
             <Route path="/my-products" element={<MyProducts />} />
             <Route path="/my-chats" element={<MyChats />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     </BrowserRouter>
