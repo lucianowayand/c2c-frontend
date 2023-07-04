@@ -18,7 +18,7 @@ export default function Router() {
             <Route path="/publish-product" element={<PublishProductPage />} />
             <Route path="/my-products" element={<MyProducts />} />
             <Route path="/my-chats" element={<MyChats />} />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/chat/:chat_id" element={<Chat />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     </BrowserRouter>
