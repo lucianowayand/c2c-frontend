@@ -213,10 +213,9 @@ export default function MyProducts() {
         {!isLoading && user &&(
           <DashboardLayout>
           <div className="bg-white p-6 flex flex-col space-y-8">
-            <div className='flex flex-row w-full'>
+            <div className='flex flex-row w-full justify-between'>
               <div className="text-4xl font-bold">Meus anúncios</div>
-              <div className='absolute right-72 flex gap-4 items-center'>
-              </div>
+              <a className="p-2 bg-orange-600 text-white text-xl rounded-xl" href="/publish-product">Adicionar produto</a>
             </div>
             <div className="grid grid-cols-2 gap-8">
               {mockProducts?.map((product) => (
