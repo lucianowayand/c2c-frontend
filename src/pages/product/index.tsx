@@ -32,7 +32,7 @@ export default function ProductPage() {
         const res = await api.post(`/api/v1/products/${product_id}/chat/${user?.id}`)
         const chat = res.data
         if (chat) {
-          window.location.href = `/chat/${chat.id}`
+          window.location.href = `/product/${product_id}/chat/${chat.id}`
         }
       } catch (error) {
         console.log(error)

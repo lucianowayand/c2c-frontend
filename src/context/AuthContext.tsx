@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 
 export interface User {
-    id: number;
+    id: string;
     full_name: string;
     email: string;
 }
@@ -18,10 +18,14 @@ interface AuthContextValues {
 
 const AuthContext = createContext<AuthContextValues>({
     user: undefined,
-    setUser: () => { },
-    logOut: () => { },
-    logIn: () => { },
     isLoading: true,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    setUser: () => { },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    logOut: () => { },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    logIn: () => { },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     setIsLoading: () => { }
 })
 
