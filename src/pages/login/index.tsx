@@ -7,6 +7,7 @@ export default function Login() {
     const { logIn } = useAuth()
     const { width } = useWindowDimensions()
     const { user, isLoading } = useAuth()
+    const [register, setRegister] = useState(false)
     
     useEffect(() => {
         if(isLoading) return
@@ -28,31 +29,91 @@ export default function Login() {
         {!isLoading && !user && (
             <div className="h-screen flex">
             <div className="w-1/3 flex flex-col justify-center items-center overflow-hidden">
-            <form className="flex flex-col gap-5 w-96 mb-44" onSubmit={submitForm}>
-                <label>
-                    <div className="text-orange-600 font-bold text-2xl">EMAIL</div>
-                    <input 
-                        required 
-                        className="border-2 rounded border-orange-600 h-12 w-full p-1" 
-                        type="text" 
-                        name="name" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
-                    />
-                </label>
-                <label>
-                    <div className="text-orange-600 font-bold text-2xl">SENHA</div>
-                    <input 
-                        required 
-                        className="border-2 rounded border-orange-600 h-12 w-full p-1" 
-                        type="password" 
-                        name="password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                    />
-                </label>
-                <input className="bg-orange-600 text-white rounded-xl w-72 h-10 self-center mt-16 text-xl hover:bg-orange-500" type="submit" value="Entrar" />
-            </form>
+            {!register && <form className="flex flex-col gap-5 w-96 mb-44" onSubmit={submitForm}>
+                    <label>
+                        <div className="text-orange-600 font-bold text-2xl">EMAIL</div>
+                        <input 
+                            required 
+                            className="border-2 rounded border-orange-600 h-12 w-full p-1" 
+                            type="text" 
+                            name="name" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                        />
+                    </label>
+                    <label>
+                        <div className="text-orange-600 font-bold text-2xl">SENHA</div>
+                        <input 
+                            required 
+                            className="border-2 rounded border-orange-600 h-12 w-full p-1" 
+                            type="password" 
+                            name="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                        />
+                    </label>
+                    <input className="bg-orange-600 text-white rounded-xl w-72 h-10 self-center mt-16 text-xl hover:bg-orange-500" type="submit" value="Entrar" />
+                    <p className="text-orange-600 text-xl font-semibold self-center cursor-pointer"  onClick={() => setRegister(true)}>Registrar-se</p>
+                </form>}
+                {register && <form className="flex flex-col gap-5 w-96 mb-44" onSubmit={submitForm}>
+                    <label>
+                        <div className="text-orange-600 font-bold text-2xl">NOME</div>
+                        <input 
+                            required 
+                            className="border-2 rounded border-orange-600 h-12 w-full p-1" 
+                            type="text" 
+                            name="name" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                        />
+                    </label>
+                    <label>
+                        <div className="text-orange-600 font-bold text-2xl">EMAIL</div>
+                        <input 
+                            required 
+                            className="border-2 rounded border-orange-600 h-12 w-full p-1" 
+                            type="text" 
+                            name="name" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                        />
+                    </label>
+                    <label>
+                        <div className="text-orange-600 font-bold text-2xl">SENHA</div>
+                        <input 
+                            required 
+                            className="border-2 rounded border-orange-600 h-12 w-full p-1" 
+                            type="password" 
+                            name="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                        />
+                    </label>
+                    <label>
+                        <div className="text-orange-600 font-bold text-2xl">CIDADE</div>
+                        <input 
+                            required 
+                            className="border-2 rounded border-orange-600 h-12 w-full p-1" 
+                            type="text" 
+                            name="name" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                        />
+                    </label>
+                    <label>
+                        <div className="text-orange-600 font-bold text-2xl">ESTADO</div>
+                        <input 
+                            required 
+                            className="border-2 rounded border-orange-600 h-12 w-full p-1" 
+                            type="text" 
+                            name="name" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                        />
+                    </label>
+                    <input className="bg-orange-600 text-white rounded-xl w-72 h-10 self-center mt-16 text-xl hover:bg-orange-500" type="submit" value="Cadastrar" onClick={() => setRegister(false)} />
+                    <p className="text-orange-600 text-xl font-semibold self-center cursor-pointer"  onClick={() => setRegister(false)}>Conecte-se</p>
+                </form>}
             <div id='bolinhas' className=' absolute bg-orange-600 h-32 w-1/3 bottom-0'></div>
 
             </div>
