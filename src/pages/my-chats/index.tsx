@@ -17,7 +17,7 @@ export default function MyChats() {
   async function getOwnerChats() {
     try {
       const res = await api.get(`/api/v1/products/chat/owner/${user?.id}`)
-      setOwnerChats(res.data)
+      setOwnerChats(res.data.filter((chat:any) => chat.product.owner.id === user?.id))
     } catch (error) {
       console.log(error)
     }
@@ -27,8 +27,7 @@ export default function MyChats() {
   async function getBuyerChats() {
     try {
       const res = await api.get(`/api/v1/products/chat/buyer/${user?.id}`)
-      console.log(res.data)
-      setBuyerChats(res.data)
+      setBuyerChats(res.data.filter((chat:any) => chat.product.owner.id === user?.id))
     } catch (error) {
       console.log(error)
     }
@@ -46,7 +45,7 @@ export default function MyChats() {
             </div>
             <div className="grid grid-cols-2 gap-8">
               {ownerChats?.map((chat) => (
-                <a href={`/product/${chat?.product.id}/chat/${chat.id}`} className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
+                <a key={chat.id} href={`/product/${chat?.product.id}/chat/${chat.id}`} className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
                     <img src={chat.product.photos[0].photo_url} width={200} height={12} alt="" />
                     <div className="flex flex-col justify-center items-center p-16">
                         <p className="text-xl">{chat.product.name}</p>
@@ -62,7 +61,7 @@ export default function MyChats() {
             <div className="grid grid-cols-2 gap-8">
               {buyerChats?.map((chat) => (
                 chat.product && (
-                <a href={`/product/${chat?.product?.id}/chat/${chat.id}`} className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
+                <a key={chat.id} href={`/product/${chat?.product?.id}/chat/${chat.id}`} className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
                   <img src={chat.product?.photos[0].photo_url} width={200} height={12} alt="" />
                   <div className="flex flex-col justify-center items-center p-16">
                       <p className="text-xl">{chat.product?.name}</p>                                   

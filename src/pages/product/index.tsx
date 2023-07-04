@@ -29,10 +29,14 @@ export default function ProductPage() {
 
     async function createChat() {
       try{
-        const res = await api.post(`/api/v1/products/${product_id}/chat/${user?.id}`)
-        const chat = res.data
-        if (chat) {
-          window.location.href = `/product/${product_id}/chat/${chat.id}`
+        if(product.owner.id !== user?.id){
+          const res = await api.post(`/api/v1/products/${product_id}/chat/${user?.id}`)
+          const chat = res.data
+          if (chat) {
+            window.location.href = `/product/${product_id}/chat/${chat.id}`
+          }
+        } else {
+          alert("Você não pode iniciar uma conversa com você mesmo!")
         }
       } catch (error) {
         console.log(error)
