@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useAuth } from "../../context/AuthContext"
 
-export default function DashboardLayout({ children }: any) {
+export default function DashboardLayout({ children, ignorePadding }: any) {
     const { user, isLoading } = useAuth()
     const [productName, setProductName] = useState('')
 
@@ -30,7 +30,7 @@ export default function DashboardLayout({ children }: any) {
                     <a href="/home" className="absolute text-white font-black text-5xl right-0 mr-12 mt-5">C2C.</a>
                 </div>
                 <div className='w-screen flex flex-1 justify-center'>
-                    <div className="bg-white w-3/4 p-8 flex justify-center">
+                    <div className={`bg-white w-3/4 ${ignorePadding ? "" : "p-8"} flex justify-center`}>
                         {children}
                     </div>
                 </div>
