@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useAuth } from "../../context/AuthContext"
 
 export default function DashboardLayout({ children, ignorePadding }: any) {
-    const { user, isLoading } = useAuth()
+    const { user, isLoading, logOut } = useAuth()
     const [productName, setProductName] = useState('')
     const [dropdownMenu, setDropdownMenu] = useState(false)
 
@@ -27,7 +27,7 @@ export default function DashboardLayout({ children, ignorePadding }: any) {
                     {dropdownMenu && <div className="absolute flex flex-col bg-zinc-200 w-40 left-0 ml-20 mt-20 space-y-px">
                         <a href='' className="bg-zinc-100 p-1">Meus anúncios</a>    
                         <a href='' className="bg-zinc-100 p-1">Chat</a>  
-                        <a href='' className="bg-zinc-100 p-1">Logout</a>  
+                        <a onClick={logOut} className="bg-zinc-100 p-1 cursor-pointer">Logout</a>  
                     </div>}
                     <div className="w-1/3 flex justify-center">
                         <input className="w-96 h-12 mt-6 flex-none" type="text" value={productName} onChange={(e) => setProductName(e.target.value)}/>
