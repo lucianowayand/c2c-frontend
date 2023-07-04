@@ -226,7 +226,9 @@ export default function MyProducts() {
                           <p className="text-xl">{product.name}</p>
                           <div className="flex gap-4">
                               <button className="border-2 p-1 rounded-3xl border-orange-600 text-orange-600 font-bold">Marcar como vendido</button>
-                              <EditIcon size={32} color="grey"/>
+                              <a href={`/update-product/${product.id}`}>
+                                <EditIcon size={32} color="grey"/>
+                              </a>
                           </div>
                         </div>
                         <p className="text-xl font-bold">R$ {product.value}</p>

@@ -4,7 +4,7 @@ import './style.css'
 import CloseIcon from '../../components/icons/CloseIcon';
 import axios from 'axios';
 
-export default function PublishProductPage() {
+export default function UpdateProductPage() {
     function submitForm(e:any) {
         console.log("here")
         e.preventDefault();
@@ -132,7 +132,7 @@ export default function PublishProductPage() {
                 <input 
                     className="bg-orange-600 text-white rounded-xl w-72 h-10 self-center mt-16 text-xl hover:bg-orange-500" 
                     type="submit" 
-                    value="Publicar anúncio" 
+                    value="Editar anúncio" 
                 />
             </form>
             
