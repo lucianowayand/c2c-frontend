@@ -1,9 +1,10 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useAuth } from "../../context/AuthContext"
 
 export default function DashboardLayout({ children }: any) {
     const { user, isLoading } = useAuth()
-    
+    const [productName, setProductName] = useState('')
+
     useEffect(() => {
         if(isLoading) return
         if(!user) {
@@ -23,8 +24,8 @@ export default function DashboardLayout({ children }: any) {
                         <div className='w-full h-2 bg-white'></div>
                     </a>
                     <div className="w-1/3 flex justify-center">
-                        <input className="w-96 h-12 mt-6 flex-none" type="text" />
-                        <a className="h-12 w-12 bg-white mt-6 ml-2 flex-none" href=""></a>
+                        <input className="w-96 h-12 mt-6 flex-none" type="text" value={productName} onChange={(e) => setProductName(e.target.value)}/>
+                        <a className="h-12 w-12 bg-white mt-6 ml-2 flex-none" href={`/home?product-name=${productName}`}></a>
                     </div>
                     <a href="/home" className="absolute text-white font-black text-5xl right-0 mr-12 mt-5">C2C.</a>
                 </div>
