@@ -32,7 +32,7 @@ export default function Home() {
           category: category,
           city: city,
           state: state,
-          orderBy: orderBy,
+          order_price: orderBy,
           name: name
         }})
         setProducts(res.data)
@@ -59,7 +59,7 @@ export default function Home() {
     }
 
     function filterCount() {
-      return (category !== '' ? 1 : 0) + (city !== '' ? 1 : 0) + (state !== '' ? 1 : 0) + (orderBy !== '' ? 1 : 0)
+      return (category !== '' ? 1 : 0) + (city !== '' ? 1 : 0) + (state !== '' ? 1 : 0) + (orderBy !== 'DESC' ? 1 : 0)
     }
 
     return ( 
@@ -78,12 +78,16 @@ export default function Home() {
                 <label>
                     <div className="text-orange-600 font-bold text-xl ">Categoria</div>
                     <select name="cars" className="border-2 rounded border-orange-600 h-8 w-full p-1" value={category} onChange={(e) => setCategory(e.target.value)} >
-                        <option value="category">Livros</option>
-                        <option value="cars">Carros</option>
-                        <option value="toys">Brinquedos</option>
-                        <option value="tools">Ferramentas</option>
-                        <option value="kitchen">Cozinha</option>
-                        <option value="forniture">Móveis</option>
+                        <option value="">Selecione...</option>
+                        <option value="BOOKS">Livros</option>
+                        <option value="CLOTHING">Roupas</option>
+                        <option value="ENTERTAINMENT">Entretenimento</option>
+                        <option value="ELETRONICS">Eletrônicos</option>
+                        <option value="FURNITURE">Móveis</option>
+                        <option value="IMOBILIARY">Imobiliário</option>
+                        <option value="KITCHEN">Cozinha</option>
+                        <option value="SCHOOL_SUPPLIES">Material escolar</option>
+                        <option value="VEHICLES">Veículos</option>
                     </select> 
                 </label>
                 <label>
@@ -109,8 +113,8 @@ export default function Home() {
                 <label>
                     <div className="text-orange-600 font-bold text-xl ">Ordenar por</div>
                     <select name="order" className="border-2 rounded border-orange-600 h-8 w-full p-1" value={orderBy} onChange={(e) => setOrderBy(e.target.value)} >
-                        <option value="decrescente">Preço decrescente</option>
-                        <option value="crescente">Preço crescente</option>
+                        <option value="DESC">Preço decrescente</option>
+                        <option value="ASC">Preço crescente</option>
                     </select>
                 </label>
                 <div className='flex bg-orange-600 text-white rounded-xl w-72 h-8 self-center text-xl  hover:bg-orange-500 items-center justify-center' style={{ cursor: "pointer" }} onClick={() => {
