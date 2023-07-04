@@ -65,13 +65,58 @@ export default function Home() {
     return ( 
       <DashboardLayout>
         {filterModal && <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center align-middle" style={{background: "rgb(0,0,0,0.7)"}}>
-          <div className="bg-white p-8 flex flex-col space-y-8" style={{opacity:"1 !important"}}>
+          <div className="bg-white p-8 flex flex-col space-y-8 w-1/2 h-1/2 self-center rounded-xl overflow-hidden" style={{opacity:"1 !important"}}>
             <div className="flex flex-row justify-between">
               <div className="text-4xl font-bold">Filtros</div>
               <div style={{ cursor: "pointer" }} onClick={() => {
                   setFilterModal(false)
                 }}>
                   <CloseIcon />
+                </div>
+            </div>
+            <div className="flex flex-col gap-5 w-96 self-center">
+                <label>
+                    <div className="text-orange-600 font-bold text-xl ">Categoria</div>
+                    <select name="cars" className="border-2 rounded border-orange-600 h-8 w-full p-1" value={category} onChange={(e) => setCategory(e.target.value)} >
+                        <option value="category">Livros</option>
+                        <option value="cars">Carros</option>
+                        <option value="toys">Brinquedos</option>
+                        <option value="tools">Ferramentas</option>
+                        <option value="kitchen">Cozinha</option>
+                        <option value="forniture">Móveis</option>
+                    </select> 
+                </label>
+                <label>
+                    <div className="text-orange-600 font-bold text-lg ">Cidade</div>
+                    <input 
+                        required 
+                        className="border-2 rounded border-orange-600 h-8 w-full p-1" 
+                        type="text" 
+                        value={city} 
+                        onChange={(e) => setCity(e.target.value)} 
+                    />
+                </label>
+                <label>
+                    <div className="text-orange-600 font-bold text-xl ">Estado</div>
+                    <input 
+                        required 
+                        className="border-2 rounded border-orange-600 h-8 w-full p-1" 
+                        type="text" 
+                        value={state} 
+                        onChange={(e) => setState(e.target.value)} 
+                    />
+                </label>
+                <label>
+                    <div className="text-orange-600 font-bold text-xl ">Ordenar por</div>
+                    <select name="order" className="border-2 rounded border-orange-600 h-8 w-full p-1" value={orderBy} onChange={(e) => setOrderBy(e.target.value)} >
+                        <option value="decrescente">Preço decrescente</option>
+                        <option value="crescente">Preço crescente</option>
+                    </select>
+                </label>
+                <div className='flex bg-orange-600 text-white rounded-xl w-72 h-8 self-center text-xl  hover:bg-orange-500 items-center justify-center' style={{ cursor: "pointer" }} onClick={() => {
+                  setFilterModal(false)
+                  }}>
+                  <p>Aplicar</p>
                 </div>
             </div>
           
