@@ -24,9 +24,9 @@ export default function DashboardLayout({ children, ignorePadding }: any) {
                         <div className='w-full h-2 bg-white'></div>
                         <div className='w-full h-2 bg-white'></div>
                     </div>
-                    {dropdownMenu && <div className="absolute flex flex-col bg-zinc-200 w-40 left-0 ml-20 mt-20 space-y-px">
-                        <a href='' className="bg-zinc-100 p-1">Meus anúncios</a>    
-                        <a href='' className="bg-zinc-100 p-1">Chat</a>  
+                    {dropdownMenu && <div className="absolute flex flex-col bg-zinc-200 rounded-md overflow-hidden w-40 left-0 ml-20 mt-20 space-y-px">
+                        <a href='/my-products' className="bg-zinc-100 p-1">Meus anúncios</a>    
+                        <a href='/my-chats' className="bg-zinc-100 p-1">Chats</a>  
                         <a onClick={logOut} className="bg-zinc-100 p-1 cursor-pointer">Logout</a>  
                     </div>}
                     <div className="w-1/3 flex justify-center">
