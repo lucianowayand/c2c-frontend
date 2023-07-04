@@ -13,7 +13,7 @@ export default function Home() {
     const [category, setCategory] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
-    const [orderBy, setOrderBy] = useState('')
+    const [orderBy, setOrderBy] = useState('DESC')
     const [name, setName] = useState('')
 
     useEffect(() => {
@@ -136,7 +136,7 @@ export default function Home() {
                     setCategory('')
                     setCity('')
                     setState('')
-                    setOrderBy('')
+                    setOrderBy('DESC')
                   }}>
                     <CloseIcon />
                   </div>

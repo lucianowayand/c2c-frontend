@@ -32,7 +32,7 @@ export default function Chat() {
   
   // Call the function every 3 seconds
   useEffect(() => {
-    const interval = setInterval(getChatMessages, 3000);
+    const interval = setInterval(getChatMessages, 1000);
     // Clean up the interval when the component unmounts to avoid memory leaks.
     return () => clearInterval(interval);
   }, []);
