@@ -126,7 +126,7 @@ export default function Home() {
           
           </div>
         </div>}
-        <div className="bg-white p-8 flex flex-col space-y-8">
+        <div className="bg-white p-8 flex w-full flex-col space-y-8">
           <div className='flex flex-row w-full justify-between'>
             <div className="text-4xl font-bold">Anúncios</div>
             <div className='flex gap-4 items-center'>
