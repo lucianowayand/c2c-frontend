@@ -2,6 +2,7 @@ import useWindowDimensions from "../../hooks/useWindowDimensions"
 import {  useEffect, useState } from "react"
 import { useAuth } from "../../context/AuthContext"
 import myImage from './assets/shopping-bags.svg'
+import { api } from "../../services/api"
 
 export default function Login() {
     const { logIn } = useAuth()
@@ -18,10 +19,22 @@ export default function Login() {
 
     const [password, setPassword] = useState<string>("")
     const [email, setEmail] = useState<string>("")
+    const [name, setName] = useState<string>("")
+    const [city, setCity] = useState<string>("")
+    const [state, setState] = useState<string>("")
 
     const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         logIn(email, password)
+    }
+
+    async function submitRegister(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+        
+        const res = await api.post('api/v1/users', { email, password, full_name: name, city, state })
+        if(res.data) {
+            logIn(email, password)
+        }
     }
 
     return (
@@ -63,8 +76,8 @@ export default function Login() {
                             className="border-2 rounded border-orange-600 h-12 w-full p-1" 
                             type="text" 
                             name="name" 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
+                            value={name} 
+                            onChange={(e) => setName(e.target.value)} 
                         />
                     </label>
                     <label>
@@ -96,8 +109,8 @@ export default function Login() {
                             className="border-2 rounded border-orange-600 h-12 w-full p-1" 
                             type="text" 
                             name="name" 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
+                            value={city} 
+                            onChange={(e) => setCity(e.target.value)} 
                         />
                     </label>
                     <label>
@@ -107,11 +120,11 @@ export default function Login() {
                             className="border-2 rounded border-orange-600 h-12 w-full p-1" 
                             type="text" 
                             name="name" 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
+                            value={state} 
+                            onChange={(e) => setState(e.target.value)} 
                         />
                     </label>
-                    <input className="bg-orange-600 text-white rounded-xl w-72 h-10 self-center mt-16 text-xl hover:bg-orange-500" type="submit" value="Cadastrar" onClick={() => setRegister(false)} />
+                    <input className="bg-orange-600 text-white rounded-xl w-72 h-10 self-center mt-16 text-xl hover:bg-orange-500" type="submit" value="Cadastrar" onClick={(e) => submitRegister(e)} />
                     <p className="text-orange-600 text-xl font-semibold self-center cursor-pointer"  onClick={() => setRegister(false)}>Conecte-se</p>
                 </form>}
             <div id='bolinhas' className=' absolute bg-orange-600 h-32 w-1/3 bottom-0'></div>

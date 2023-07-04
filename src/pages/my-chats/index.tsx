@@ -17,7 +17,8 @@ export default function MyChats() {
   async function getOwnerChats() {
     try {
       const res = await api.get(`/api/v1/products/chat/owner/${user?.id}`)
-      setOwnerChats(res.data.filter((chat:any) => chat.product.owner.id === user?.id))
+      console.log(res.data)
+      setOwnerChats(res.data)
     } catch (error) {
       console.log(error)
     }
@@ -27,7 +28,7 @@ export default function MyChats() {
   async function getBuyerChats() {
     try {
       const res = await api.get(`/api/v1/products/chat/buyer/${user?.id}`)
-      setBuyerChats(res.data.filter((chat:any) => chat.product.owner.id === user?.id))
+      setBuyerChats(res.data)
     } catch (error) {
       console.log(error)
     }
