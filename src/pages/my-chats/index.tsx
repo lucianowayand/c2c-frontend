@@ -61,13 +61,15 @@ export default function MyChats() {
             </div>
             <div className="grid grid-cols-2 gap-8">
               {buyerChats?.map((chat) => (
-                <a href={`/product/${chat?.product.id}/chat/${chat.id}`} className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
-                    <img src={chat.product.photos[0].photo_url} width={200} height={12} alt="" />
-                    <div className="flex flex-col justify-center items-center p-16">
-                        <p className="text-xl">{chat.product.name}</p>                                   
-                        <p className="text-xl">{chat.product.owner.full_name}</p> 
-                    </div>
+                chat.product && (
+                <a href={`/product/${chat?.product?.id}/chat/${chat.id}`} className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
+                  <img src={chat.product?.photos[0].photo_url} width={200} height={12} alt="" />
+                  <div className="flex flex-col justify-center items-center p-16">
+                      <p className="text-xl">{chat.product?.name}</p>                                   
+                      <p className="text-xl">{chat.product?.owner.full_name}</p> 
+                  </div>
                 </a>
+              )
               ))}
             </div>
         </div>

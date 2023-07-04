@@ -3,19 +3,28 @@ import DashboardLayout from '../../components/dashboard-layout'
 import './style.css'
 import CloseIcon from '../../components/icons/CloseIcon';
 import axios from 'axios';
+import { api } from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
 
 export default function PublishProductPage() {
-    function submitForm(e:any) {
-        console.log("here")
-        e.preventDefault();
+    const { user } = useAuth();
 
-        console.log({
+    async function submitForm(e:any) {
+        e.preventDefault();
+        try {
+
+        const res = await api.post(`api/v1/products/owner/${user?.id}`,{
             name,
-            price,
+            value,
             description,
             category,
-            images
+            photos: images
         })
+        console.log(res.data)
+        window.location.href = `/product/${res.data.id}`
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async function uploadImages(e: any, index: number) {
@@ -34,7 +43,7 @@ export default function PublishProductPage() {
                 if(res.data.image.display_url){
                     setImages((prevImages) => {
                         const newImages = [...prevImages];
-                        newImages[index] = res.data.image.display_url;
+                        newImages[index] = {photo_url: res.data.image.display_url};
                         return newImages;
                     });   
                 }             
@@ -67,21 +76,21 @@ export default function PublishProductPage() {
                     <div className="bg-white p-1 rounded-full cursor-pointer" style={{position:"relative", width:"min-content", top:30, left:85}} onClick={() => removeImage(index)}>
                         <CloseIcon/>
                     </div>
-                    <img className='border-4 h-28 w-28 border-orange-600 rounded-xl' src={images[index]} alt=""/>
+                    <img className='border-4 h-28 w-28 border-orange-600 rounded-xl' src={images[index].photo_url} alt=""/>
                 </div>
                 }
         </>
     }
 
     const [name, setName] = useState<string>("")
-    const [price, setPrice] = useState<string>("")
+    const [value, setValue] = useState<string>("")
     const [description, setDescription] = useState<string>("")
-    const [category, setCategory] = useState<string>("")
-    const [images, setImages] = useState<string[]>([])
+    const [category, setCategory] = useState<string>("select")
+    const [images, setImages] = useState<any[]>([])
 
     return (
         <DashboardLayout>
-            <form className="flex flex-col gap-5 w-96" onSubmit={submitForm}>
+            <form className="flex flex-col gap-5 w-full" onSubmit={submitForm}>
                 <label>
                     <div className="text-orange-600 font-bold text-2xl mb-2">Título</div>
                     <input 
@@ -98,8 +107,8 @@ export default function PublishProductPage() {
                         required 
                         className="border-2 rounded border-orange-600 h-12 w-full p-1" 
                         type="number" 
-                        value={price} 
-                        onChange={(e) => setPrice(e.target.value)} 
+                        value={value} 
+                        onChange={(e) => setValue(e.target.value)} 
                     />
                 </label>
                 <label>
@@ -114,13 +123,17 @@ export default function PublishProductPage() {
                 </label>
                 <label>
                     <div className="text-orange-600 font-bold text-2xl mb-2">Categoria</div>
-                    <select name="cars" className="border-2 rounded border-orange-600 h-12 w-full p-1" onChange={(e) => setCategory(e.target.value)} >
-                        <option value="category">Livros</option>
-                        <option value="cars">Carros</option>
-                        <option value="toys">Brinquedos</option>
-                        <option value="tools">Ferramentas</option>
-                        <option value="kitchen">Cozinha</option>
-                        <option value="forniture">Móveis</option>
+                    <select name="cars" className="border-2 rounded border-orange-600 h-12 w-full p-1" value={category} onChange={(e) => setCategory(e.target.value)} >
+                        <option value="select" disabled>Selecione...</option>
+                        <option value="BOOKS">Livros</option>
+                        <option value="CLOTHING">Roupas</option>
+                        <option value="ENTERTAINMENT">Entretenimento</option>
+                        <option value="ELETRONICS">Eletrônicos</option>
+                        <option value="FURNITURE">Móveis</option>
+                        <option value="IMOBILIARY">Imobiliário</option>
+                        <option value="KITCHEN">Cozinha</option>
+                        <option value="SCHOOL_SUPPLIES">Material escolar</option>
+                        <option value="VEHICLES">Veículos</option>
                     </select> 
                 </label>
                 <div className="text-orange-600 font-bold text-2xl">Imagens</div>

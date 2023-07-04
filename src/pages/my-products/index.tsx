@@ -45,15 +45,10 @@ export default function MyProducts() {
           {products?.map((product: any) => (
             <div className="flex border-2 border-zinc-300 rounded-xl overflow-hidden">
                 <img src={product.photos[0].photo_url} width={200} height={12} alt="" />
-                <div className="flex flex-col p-2">
-                  <div className="flex space-x-24">
+                <div className="flex flex-col p-2 w-full">
+                  <div className="flex justify-between pr-2">
                     <a href={`/product/${product.id}`} className="text-xl">{product.name}</a>
-                    <div className="flex gap-4">
-                        <button onClick={() => deleteProduct(product.id)} className="border-2 p-1 rounded-3xl border-orange-600 text-orange-600 font-bold">Marcar como vendido</button>
-                        <a href={`/update-product/${product.id}`}>
-                          <EditIcon size={32} color="grey"/>
-                        </a>
-                    </div>
+                      <button onClick={() => deleteProduct(product.id)} className="border-2 p-1 rounded-3xl border-orange-600 text-orange-600 font-bold">Marcar como vendido</button>
                   </div>
                   <p className="text-xl font-bold">R$ {product.value}</p>
                   <div className='flex mt-8 gap-2'>

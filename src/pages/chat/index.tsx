@@ -72,7 +72,7 @@ export default function Chat() {
   const [message, setMessage] = useState<string>("")  
   return (
     <DashboardLayout ignorePadding={true}>
-    <div className='w-screen flex flex-1 flex-col justify-center items-center'>
+    <div className='h-full flex flex-1 flex-col justify-center items-center'>
         <div className="bg-white w-full p-8 flex flex-1 justify-center">
             <div className="flex flex-col w-full">
                 <div className="flex items-center">

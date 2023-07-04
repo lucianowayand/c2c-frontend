@@ -1,8 +1,8 @@
-import LocalIcon from './assets/local.svg'
 import DashboardLayout from "../../components/dashboard-layout"
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import CloseIcon from '../../components/icons/CloseIcon'
+import LocalIcon from "../../components/icons/LocalIcon"
 
 export default function Home() {
     const searchParams = new URLSearchParams(document.location.search)
@@ -59,7 +59,7 @@ export default function Home() {
     }
 
     function filterCount() {
-      return (category !== '' ? 1 : 0) + (city !== '' ? 1 : 0) + (state !== '' ? 1 : 0) + (orderBy !== 'DESC' ? 1 : 0)
+      return (category !== '' ? 1 : 0) + (city !== '' ? 1 : 0) + (state !== '' ? 1 : 0) + (orderBy !== 'DESC' ? 1 : 0) + (name !== '' ? 1 : 0)
     }
 
     return ( 
@@ -137,6 +137,7 @@ export default function Home() {
                     setCity('')
                     setState('')
                     setOrderBy('DESC')
+                    setName('')
                   }}>
                     <CloseIcon />
                   </div>
@@ -157,7 +158,7 @@ export default function Home() {
                       <p className="text-xl">{product.name}</p>
                       <p className="text-xl font-bold">R$ {product.value}</p>
                       <div className='flex mt-8 gap-2'>
-                        <img className='' src={LocalIcon} alt="icon" width={24} height={24}/>
+                        <LocalIcon size={24}/>
                         <p>{product.owner.city},</p>
                         <p>{product.owner.state}</p>
                       </div>

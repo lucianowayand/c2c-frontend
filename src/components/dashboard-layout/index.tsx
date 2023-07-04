@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useAuth } from "../../context/AuthContext"
+import SearchIcon from "../icons/SearchIcon"
 
 export default function DashboardLayout({ children, ignorePadding }: any) {
     const { user, isLoading, logOut } = useAuth()
@@ -30,14 +31,18 @@ export default function DashboardLayout({ children, ignorePadding }: any) {
                         <a onClick={logOut} className="bg-zinc-100 p-1 cursor-pointer">Logout</a>  
                     </div>}
                     <div className="w-1/3 flex justify-center">
-                        <input className="w-96 h-12 mt-6 flex-none" type="text" value={productName} onChange={(e) => setProductName(e.target.value)}/>
-                        <a className="h-12 w-12 bg-white mt-6 ml-2 flex-none" href={`/home?product-name=${productName}`}></a>
+                        <input className="p-2 w-96 h-12 mt-6 flex-none" type="text" value={productName} onChange={(e) => setProductName(e.target.value)}/>
+                        <a className="h-12 w-12 bg-white mt-6 ml-2 flex justify-center items-center" href={`/home?product-name=${productName}`}>
+                            <SearchIcon size={30} />
+                        </a>
                     </div>
                     <a href="/home" className="absolute text-white font-black text-5xl right-0 mr-12 mt-5">C2C.</a>
                 </div>
                 <div className='w-screen flex flex-1 justify-center'>
                     <div className={`bg-white w-3/4 ${ignorePadding ? "" : "p-8"} flex justify-center`}>
-                        {children}
+                        <div className="w-full">
+                            {children}
+                        </div>
                     </div>
                 </div>
             </div>
