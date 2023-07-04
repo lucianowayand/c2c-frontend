@@ -1,11 +1,29 @@
 import chatIcon from './assets/chatIcon.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DashboardLayout from '../../components/dashboard-layout'
 import ArrowLeft from '../../components/icons/ArrowLeft'
 import ArrowRight from '../../components/icons/ArrowRight'
 import moment from 'moment'
+import { useParams } from 'react-router-dom'
+import { api } from '../../services/api'
 
 export default function ProductPage() {
+    const {product_id} = useParams()
+    const [product, setProduct]= useState<any>()
+
+    useEffect(() => {
+    getProductInfo()
+    }, [])
+
+    async function getProductInfo() {
+      try {
+        const res = await api.get(`/api/v1/products/${product_id}`)
+        setProduct(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     const mockProduct = {
         id: "7d30bd81-a84a-4348-982c-5cda7e4eb48e",
         createdAt: "2023-07-02T01:25:53.377Z",
@@ -51,8 +69,10 @@ export default function ProductPage() {
     return (
         <DashboardLayout>
           <div className="flex w-full justify-center p-8 space-x-24 mt-12">
+              {product && 
+              <>
               <div className="flex flex-col gap-6">
-                <div className="text-4xl font-semibold">{mockProduct.name}</div>
+                <div className="text-4xl font-semibold">{product?.name}</div>
                 <div className="text-zinc-500">Publicado em: {publishedAt}</div>
                 <div className="flex justify-center bg-zinc-300">
                     <div className='px-2 flex items-center'>
@@ -65,24 +85,24 @@ export default function ProductPage() {
                         <ArrowLeft size={40} color={photoIndex !== undefined && photoIndex > 0 ? "currentColor" : "grey"} />
                       </div>
                     </div>
-                    <img src={mockProduct.photos[photoIndex].photo_url} width={500} height={400} alt="" />
+                    <img src={product?.photos[photoIndex].photo_url} width={500} height={400} alt="" />
                     <div className='px-2 flex items-center'>
                       <div onClick={() => {
-                        if (photoIndex !== undefined && photoIndex < mockProduct.photos.length - 1) {
+                        if (photoIndex !== undefined && photoIndex < product?.photos.length - 1) {
                             setPhotoIndex(photoIndex + 1)
                         }
                       }}
                       >
-                        <ArrowRight size={40} color={photoIndex !== undefined && photoIndex < mockProduct.photos.length - 1 ? "currentColor" : "grey"} />
+                        <ArrowRight size={40} color={photoIndex !== undefined && photoIndex < product?.photos.length - 1 ? "currentColor" : "grey"} />
                       </div>
                     </div>
                 </div>
-                <div className="text-3xl">R$ {mockProduct.value}</div>
-                <div className="text-zinc-500 text-xl">{mockProduct.description}</div>
+                <div className="text-3xl">R$ {product?.value}</div>
+                <div className="text-zinc-500 text-xl">{product?.description}</div>
             </div>
             <div className="flex flex-col border-2 border-orange-600 self-center p-8 w-80 gap-8">
                 <div className="flex flex-col">
-                    <div className="text-3xl self-center">{mockProduct.owner.full_name}</div>
+                    <div className="text-3xl self-center">{product?.owner.full_name}</div>
                     <div className="bg-zinc-500 w-full h-px mt-16"></div>
                 </div>
                 <div className="self-center font-semibold">Membro desde: {productDate}</div>
@@ -91,6 +111,8 @@ export default function ProductPage() {
                     <div className="text-white text-xl">Chat</div>
                 </div>
             </div>
+            </>
+            }
           </div>
         </DashboardLayout>
     )
