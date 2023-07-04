@@ -42,7 +42,8 @@ export default function Chat() {
     getChatMessages()
   }, [])
 
-  async function sendMessage() {
+  async function sendMessage(e:any) {
+    e.preventDefault()
     await api.post(`/api/v1/products/user/${user?.id}/chat/${chat_id}/message`, {
       message: message,
     }) 
@@ -59,7 +60,7 @@ export default function Chat() {
   function MessageBox({message}: {message: TMessage}) {
     const userIsMessageOwner = message.sender_id === user?.id
     return (
-      <div className="flex">
+      <div className="flex mt-5">
           {userIsMessageOwner && <div className="flex-1" />}
           <div className={`flex flex-col ${userIsMessageOwner ? "bg-orange-200" : "border border-orange-600"} rounded-md p-4`}>
               <p>{message.text}</p>
@@ -80,7 +81,7 @@ export default function Chat() {
                     <p className="text-3xl font-bold">{product?.name} - </p>
                     <p className="text-3xl font-bold ml-2">R$ {product?.value} </p>
                 </div>
-                <div className="flex flex-1 flex-col mt-32 gap-4">
+                <div style={{height:"70vh", overflowY:"scroll", marginTop:"2em", padding:"0 2em"}}>
                     {messages?.map((message) => (
                       <MessageBox message={message} />
                     ))}
@@ -97,6 +98,11 @@ export default function Chat() {
                         maxLength={50}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
+                        onKeyDown={(e) => { 
+                          if(e.key === 'Enter'){
+                            sendMessage(e) ;
+                          }
+                        }}
                     />
                 </form>                                
             </div>
